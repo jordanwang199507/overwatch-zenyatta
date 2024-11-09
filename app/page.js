@@ -2,30 +2,53 @@
 import { useEffect, useRef } from "react";
 import images from "@/public/images";
 import Image from "next/image";
+import { MouseParallax } from "react-just-parallax";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const sliderRef = useRef(null);
   const orbeslider = useRef(null);
+  const orbesRef = useRef(null);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      gsap.to(".model", {
+        y: 200,
+        scrollTrigger: {
+          trigger: ".model",
+          start: "30% 35%",
+          end: "20% 20%",
+          markers: true,
+          scrub: true,
+          toggleActions: "restart pause reverse pause",
+        },
+      });
+      const orbes = gsap.utils.toArray(orbesRef.current.children);
+      orbes.forEach((orbe) => {
+        gsap.to(orbe, {
+          y: 30 * (orbes.indexOf(orbe) + 5),
+          rotation: 360,
+          scrollTrigger: {
+            trigger: ".model",
+            start: "center center",
+            end: "40% 35%",
+            markers: true,
+            scrub: true,
+            toggleActions: "restart pause reverse pause",
+          },
+        });
+      });
+    }
+  }, []);
+
   return (
     <>
-      <div className="w-full h-screen relative">
+      <div className="w-full h-[120vh] relative overflow-hidden">
         <div className="max-w-[1420px] mx-auto h-full">
           <section className="h-full px-8 sm:px-16 relative text-center">
-            {/* <div
-              // ref={sliderRef}
-              className="slider"
-              style={{ "--quantity": 10 }}
-            >
-              {[...Array(10)].map((_, index) => (
-                <div
-                  key={index}
-                  className="item"
-                  style={{ "--position": index + 1 }}
-                >
-                  <img src={`/images/card${index + 1}.png`} alt="" />
-                </div>
-              ))}
-            </div> */}
-            <Image
+            {/* <Image
               src={images.arrowRight}
               height={200}
               width={100}
@@ -38,9 +61,8 @@ export default function Home() {
               width={400}
               alt="arrow decor"
               className="absolute right-0 top-1/2 -translate-y-1/2"
-            />
-            {/* <div className="h-[70vh] min-h-[700px] w-full relative"> */}
-            <Image
+            /> */}
+            {/* <Image
               src={images.orangeBlockLarge}
               width={350}
               height={160}
@@ -60,7 +82,46 @@ export default function Home() {
               width={245}
               alt="grey block decor"
               className="right-10 xl:right-72 absolute top-20"
-            />
+            /> */}
+            <MouseParallax strength={0.07}>
+              <div ref={orbesRef}>
+                <Image
+                  src={images.orbe}
+                  height={100}
+                  width={100}
+                  alt="orbe"
+                  className="absolute top-40 left-20 orbe z-[3]"
+                />
+                <Image
+                  src={images.orbe}
+                  height={50}
+                  width={50}
+                  alt="orbe"
+                  className="absolute bottom-1/2 left-20 orbe z-[3]"
+                />
+                <Image
+                  src={images.orbe}
+                  height={75}
+                  width={75}
+                  alt="orbe"
+                  className="absolute left-1/2 top-20 orbe z-[3]"
+                />
+                <Image
+                  src={images.orbe}
+                  height={100}
+                  width={100}
+                  alt="orbe"
+                  className="absolute bottom-[500px] right-0 orbe z-[3]"
+                />
+                <Image
+                  src={images.orbe}
+                  height={150}
+                  width={150}
+                  alt="orbe"
+                  className="absolute top-56 right-10 orbe z-[3]"
+                />
+              </div>
+            </MouseParallax>
             <div
               className="orbeslider"
               ref={orbeslider}
@@ -82,25 +143,33 @@ export default function Home() {
               ))}
             </div>
             <div className="absolute bottom-20 left-1/2 -translate-x-1/2 h-max w-full flex flex-wrap justify-center items-center w-min-[(1400px, 100vw)]">
-              {/* <Image
-                src={images.zenyatta}
-                height={690}
-                width={690}
-                alt="zenyatta image"
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-no-repeat bg-center bg-[auto_130%] z-[1] w-full max-w-[750px] h-[75vh] max-h-[750px] min-h-[600px]"
-              /> */}
               <h1
                 data-content="ZENYATTA"
-                // className="zenyatta drop-shadow-[5px_5px_10px_#000000]"
-                className="zenyatta uppercase text-[200px] font-nippo text-primary relative bottom-0 leading-none font-bold"
+                id="title"
+                className="zenyatta uppercase text-[200px] font-nippo text-primary relative -top-[300px] leading-none font-bold"
               >
                 ZENYATTA
               </h1>
               <div className="model"></div>
-              {/* </div> */}
+              <div
+                ref={sliderRef}
+                className="slider opacity-1 mt-10"
+                style={{ "--quantity": 10 }}
+              >
+                {[...Array(10)].map((_, index) => (
+                  <div
+                    key={index}
+                    className="item"
+                    style={{ "--position": index + 1 }}
+                  >
+                    <img src={`/images/card${index + 1}.png`} alt="" />
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
-          {/* <div className="py-60 w-full relative"></div> */}
+
+          <div className="py-60 w-full relative"></div>
         </div>
       </div>
     </>
