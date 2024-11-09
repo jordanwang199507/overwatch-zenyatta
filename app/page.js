@@ -20,7 +20,6 @@ export default function Home() {
           trigger: ".model",
           start: "30% 35%",
           end: "20% 20%",
-          markers: true,
           scrub: true,
           toggleActions: "restart pause reverse pause",
         },
@@ -34,7 +33,6 @@ export default function Home() {
             trigger: ".model",
             start: "center center",
             end: "40% 35%",
-            markers: true,
             scrub: true,
             toggleActions: "restart pause reverse pause",
           },
@@ -90,35 +88,35 @@ export default function Home() {
                   height={100}
                   width={100}
                   alt="orbe"
-                  className="absolute top-40 left-20 orbe z-[3]"
+                  className="absolute top-40 left-20 max-md:left-5 orbe z-[3] max-md:h-[55px] max-md:w-[55px]"
                 />
                 <Image
                   src={images.orbe}
                   height={50}
                   width={50}
                   alt="orbe"
-                  className="absolute bottom-1/2 left-20 orbe z-[3]"
+                  className="absolute bottom-1/2 left-20 orbe z-[3] max-md:h-[55px] max-md:w-[55px]"
                 />
                 <Image
                   src={images.orbe}
                   height={75}
                   width={75}
                   alt="orbe"
-                  className="absolute left-1/2 top-20 orbe z-[3]"
+                  className="absolute left-1/2 top-10 orbe z-[3] max-md:h-[75px] max-md:w-[75px]"
                 />
                 <Image
                   src={images.orbe}
                   height={100}
                   width={100}
                   alt="orbe"
-                  className="absolute bottom-[500px] right-0 orbe z-[3]"
+                  className="absolute bottom-[500px] right-0 orbe z-[3] max-md:h-[75px] max-md:w-[75px]"
                 />
                 <Image
                   src={images.orbe}
                   height={150}
                   width={150}
                   alt="orbe"
-                  className="absolute top-56 right-10 orbe z-[3]"
+                  className="absolute top-56 right-10 max-md:right-0 orbe z-[3] max-md:h-[35px] max-md:w-[35px]"
                 />
               </div>
             </MouseParallax>
@@ -146,14 +144,14 @@ export default function Home() {
               <h1
                 data-content="ZENYATTA"
                 id="title"
-                className="zenyatta uppercase text-[200px] font-nippo text-primary relative -top-[300px] leading-none font-bold"
+                className="zenyatta uppercase text-[200px] max-lg:text-[150px] max-md:text-[120px] max-sm:text-[95px] font-nippo text-primary relative -top-[300px] max-md:-top-[400px] leading-none font-bold"
               >
                 ZENYATTA
               </h1>
               <div className="model"></div>
               <div
                 ref={sliderRef}
-                className="slider opacity-1 mt-10"
+                className="slider opacity-1 mt-10 max-md:-mt-20"
                 style={{ "--quantity": 10 }}
               >
                 {[...Array(10)].map((_, index) => (

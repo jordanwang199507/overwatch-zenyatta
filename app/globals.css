@@ -24,7 +24,9 @@ body {
       #fffefe1d 100px 101px
     );
 }
-
+section h1.zenyatta {
+  text-shadow: 0 10px 20px #00000070;
+}
 section h1.zenyatta::after {
   position: absolute;
   inset: 0 0 0 0;
@@ -56,7 +58,7 @@ section h1.zenyatta::after {
 }
 
 .orbeslider {
-  @apply absolute w-[100px] h-[100px] flex items-center justify-center top-2/4;
+  @apply absolute w-[100px] h-[100px] flex items-center justify-center top-1/3;
   transform: perspective(1000px);
   left: calc(50% - 50px);
   transform-style: preserve-3d;
@@ -65,18 +67,18 @@ section h1.zenyatta::after {
 }
 @keyframes autoRun {
   from {
-    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    transform: perspective(1000px) rotateX(-30deg) rotateY(0deg);
   }
   to {
-    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    transform: perspective(1000px) rotateX(-30deg) rotateY(360deg);
   }
 }
 @keyframes autoRunSlider {
   from {
-    transform: perspective(1000px) rotateX(-10deg) rotateY(0deg);
+    transform: perspective(1000px) rotateX(-15deg) rotateY(0deg);
   }
   to {
-    transform: perspective(1000px) rotateX(-10deg) rotateY(360deg);
+    transform: perspective(1000px) rotateX(-15deg) rotateY(360deg);
   }
 }
 .orbeslider .orbe {
@@ -97,4 +99,58 @@ section h1.zenyatta::after {
 }
 .orbeslider .orbe img {
   @apply w-full h-full object-cover;
+}
+.orbe {
+  filter: drop-shadow(3px 2px 10px rgb(150, 134, 32));
+}
+.orbeslider .orbe {
+  filter: drop-shadow(3px 3px 10px rgb(19, 81, 129));
+}
+
+@media screen and (max-width: 1023px) {
+  .orbeslider .orbe {
+    @apply absolute inset-0;
+    /* Use CSS variables for 3D rotation and translation */
+    transform: rotateY(
+        calc((var(--orbeposition) - 1) * (360 / var(--orbequantity)) * 1deg)
+      )
+      translateZ(300px);
+  }
+  .slider .item {
+    @apply absolute inset-0;
+    /* Use CSS variables for 3D rotation and translation */
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      translateZ(450px);
+  }
+  .model {
+    width: 100%;
+    height: 75vh;
+    background-size: auto 90%;
+    background-repeat: no-repeat;
+    background-position: top center;
+  }
+}
+@media screen and (max-width: 767px) {
+  .slider {
+    @apply absolute w-[200px] h-[250px];
+    left: calc(50% - 50px);
+  }
+  .orbeslider .orbe {
+    @apply absolute inset-0;
+    /* Use CSS variables for 3D rotation and translation */
+    transform: rotateY(
+        calc((var(--orbeposition) - 1) * (360 / var(--orbequantity)) * 1deg)
+      )
+      translateZ(200px);
+  }
+  .slider .item {
+    @apply absolute inset-0;
+    /* Use CSS variables for 3D rotation and translation */
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      translateZ(350px);
+  }
 }
